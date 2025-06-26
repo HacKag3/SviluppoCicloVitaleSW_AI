@@ -5,7 +5,7 @@ install:
 	@echo Installazione delle dipendenze terminata.
 # Analisi Statistica del codice sorgente
 lint:
-	PYTHONPATH=. pylint --disable=R,C src/*.py tests/*.py
+	PYTHONPATH=. python -m pylint --disable=R,C src/*.py tests/*.py
 	@echo Linting complete.
 # Unit test
 test:

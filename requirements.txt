@@ -1,3 +1,9 @@
 pylint
 pytest
 pytest-cov
+torch
+torchvision
+scikit-learn
+matplotlib
+seaborn
+tqdm
