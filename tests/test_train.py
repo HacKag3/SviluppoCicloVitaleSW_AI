@@ -1,8 +1,10 @@
 import os
+import pytest
 from src.train_fer2013 import train_fer2013, evaluate_fer2013
 
 FER2013_MODELPATH : str = "test_fer2013_model.pth"
 
+@pytest.mark.skipif(not os.path.exists("./data/fer2013/"), reason="Dataset non disponibile")
 def test_fer2013_training():
     train_fer2013(1, FER2013_MODELPATH)
     assert os.path.exists(FER2013_MODELPATH), "Model file not found after training."
@@ -20,9 +22,11 @@ def test_fer2013_training():
     assert output.shape==(1,7), "Model output shape in incorrect."
 
     os.remove(FER2013_MODELPATH)
-    os.remove("confusion_matrix.png")
+    if os.path.exists("confusion_matrix.png"):
+        os.remove("confusion_matrix.png")
     print("Test passed: Model trained and saved successfully.")
 
+@pytest.mark.skipif(not os.path.exists("./data/fer2013/"), reason="Dataset non disponibile")
 def test_fer2013_evaluation():
     train_fer2013(1, FER2013_MODELPATH)
     evaluate_fer2013(FER2013_MODELPATH)
