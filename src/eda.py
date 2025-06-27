@@ -45,7 +45,7 @@ def eda():
     plt.ylabel("Count")
     plt.tight_layout()
     plt.savefig("class_distribution.png")
-    plt.show()
+    plt.close()
     # Mostra delle immagini di esempio
     examples = enumerate(train_loader)
     _, (examples_data, examples_targets) = next(examples)
@@ -57,7 +57,7 @@ def eda():
         plt.axis("off")
     plt.tight_layout()
     plt.savefig("samples_images.png")
-    plt.show()
+    plt.close()
 
 if __name__=="__main__":
     eda()

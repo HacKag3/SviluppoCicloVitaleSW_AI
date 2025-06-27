@@ -1,6 +1,5 @@
 # CI/CD pipeline
-
-name: Deploy 
+name: Deploy
 on: [push]
 jobs:
   build:
@@ -10,7 +9,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.13'
+        python-version: '3.10'
     - name: Install dependencies
       run: |
         make install
@@ -19,5 +18,10 @@ jobs:
         make lint
     - name: Test
       run: |
-        make test
-      
+        make lint
+    - name: Docker
+      run: |
+        docker build -t fer2013_trainer .
+
+# non possibile testing sui dati dato che non sono scaricabili dinamicamente
+# esiste la azione Test per completezza ma nel concreto viene saltato ogni test su github

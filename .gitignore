@@ -9,3 +9,10 @@ __pycache__/
 
 data/
 *.pth
+*.pt
+persistent_data/
+results/
+
+*.png
+*.jpg
+*.jpeg

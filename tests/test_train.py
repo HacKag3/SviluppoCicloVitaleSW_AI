@@ -2,7 +2,7 @@ import os
 import pytest
 from src.train_fer2013 import train_fer2013, evaluate_fer2013
 
-FER2013_MODELPATH : str = "test_fer2013_model.pth"
+FER2013_MODELPATH : str = "./results/fer2013_model.pth"
 
 @pytest.mark.skipif(not os.path.exists("./data/fer2013/"), reason="Dataset non disponibile")
 def test_fer2013_training():
@@ -11,14 +11,13 @@ def test_fer2013_training():
     assert os.path.getsize(FER2013_MODELPATH)>0, "Model file is empty."
 
     import torch
-    from src.train_fer2013 import SimpleCNN
-    model = SimpleCNN()
-    model.load_state_dict(torch.load(FER2013_MODELPATH))
+    from src.train_fer2013 import FER2013
+    fer = FER2013(FER2013_MODELPATH)
 
     xin = torch.randn(1, 1, 48, 48)
-    model.eval()
+    fer.model.eval()
     with torch.no_grad():
-        output = model(xin)
+        output = fer.model(xin)
     assert output.shape==(1,7), "Model output shape in incorrect."
 
     os.remove(FER2013_MODELPATH)
