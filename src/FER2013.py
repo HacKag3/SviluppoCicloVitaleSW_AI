@@ -65,17 +65,14 @@ class FER2013():
     def load(self, model_path: str):
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Model file {model_path} not found")
-        # Opzione 1: Caricamento completo
-        try:
-            obj = torch.load(model_path)
-            if isinstance(obj, dict):
-                self.model.load_state_dict(obj)
-                print(f"State dict loaded from {model_path}")
-            else:
-                self.model = obj
-                print(f"Full model loaded from {model_path}")
-        except Exception as e:
-            raise RuntimeError(f"Error loading model: {str(e)}")
+        
+        obj = torch.load(model_path)
+        if isinstance(obj, dict):
+            self.model.load_state_dict(obj)
+            print(f"State dict loaded from {model_path}")
+        else:
+            self.model = obj
+            print(f"Full model loaded from {model_path}")
     
     def save(self, path: str):
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -143,7 +140,7 @@ class FER2013():
             plt.title("Confusion Matrix")
             plt.savefig("./results/confusion_matrix.png")
             plt.close()
-            print(f"Salvata la matrice di confusione in ./results/confusion_matrix.png")
+            print("Salvata la matrice di confusione in ./results/confusion_matrix.png")
     
     def inference_singleImg(self, pathToImg : str, output_dir: str):
         self.model.eval()

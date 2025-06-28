@@ -1,6 +1,7 @@
 import os
 import pytest
-from src.train_fer2013 import train_fer2013, evaluate_fer2013
+from src.train_fer2013 import train_fer2013
+from src.evaluate_fer2013 import evaluate_fer2013
 
 FER2013_MODELPATH : str = "./results/fer2013_model.pth"
 
