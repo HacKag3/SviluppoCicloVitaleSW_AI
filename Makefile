@@ -18,6 +18,17 @@ else
     DOCKER_PWD := $(CURDIR)
 endif
 docker:
-	docker build -t fer2013_trainer .
-	docker run --rm -it --name fer2013_trainer -v "$(DOCKER_PWD)/persistent_data:/app/results" fer2013_trainer
+	docker build -t fer2013 .
+docker_train: docker
+	docker run --rm --name fer2013_trainer \
+		-v "$(DOCKER_PWD)/persistent_data:/app/results" \
+		fer2013 \
+		python src/train_fer2013.py
+	docker image prune -f
+docker_inference: docker
+	docker run --rm --name fer2013_inference \
+		-v "$(DOCKER_PWD)/persistent_data:/app/results" \
+		fer2013 \
+		python src/inference_fer2013.py
+	docker logs fer2013_inference
 	docker image prune -f

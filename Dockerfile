@@ -14,4 +14,3 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PYTHONPATH=/app
-CMD ["bash", "-c", "python -u src/train_fer2013.py && python -u src/inference_fer2013.py"]

@@ -14,4 +14,4 @@ def train_fer2013(epochs: int = 2, model_path: str=FER2013_MODELPATH, save_path:
     fer.save_state_dict(path=save_path)
 
 if __name__=="__main__":
-    train_fer2013()
+    train_fer2013(epochs=5)
